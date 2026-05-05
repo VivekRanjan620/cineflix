@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Film, Menu, Search, X } from "lucide-react";
+import Link from "next/link";
 
 const links = [
   { label: "Home", href: "#home" },
+  { label: "About", href: "/about" },
   { label: "Trending", href: "#trending" },
   { label: "Trailers", href: "#trailers" },
   { label: "Categories", href: "#categories" },
@@ -52,19 +54,21 @@ export const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-3">
-          <button aria-label="Search" className="p-2 rounded-full hover:bg-white/5 transition-colors">
-            <Search className="w-5 h-5" />
-          </button>
-          <a href="#newsletter" className="hidden md:inline-flex btn-neon !py-2 !px-5 !text-xs">
-            Subscribe
-          </a>
-          <button
-            aria-label="Menu"
-            className="lg:hidden p-2 rounded-full hover:bg-white/5"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-3">
+              <button className="p-2 rounded-full hover:bg-white/5">
+                <Search className="w-5 h-5" />
+             </button>
+
+              {/* LOGIN */}
+              <Link href="/login" className="text-sm font-medium hover:text-primary">
+               Login
+              </Link>
+
+              {/* REGISTER */}
+              <Link href="/register" className="btn-neon !py-2 !px-5 !text-xs">
+               Subscribe
+              </Link>
+           </div>
         </div>
       </nav>
 
