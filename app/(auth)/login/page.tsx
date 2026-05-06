@@ -19,116 +19,144 @@ export default function LoginPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    // TODO: replace with real auth call
     await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
-    // After login: redirect based on role
-    // router.push("/user/dashboard") or "/admin/dashboard"
   }
 
   return (
-    <div className="w-full max-w-md">
-      {/* Card */}
-      <div className="bg-card border border-border rounded-2xl p-8 shadow-[var(--shadow-card)] animate-fade-in">
+    // ── Page background ────────────────────────────────────────────────────
+    <div className="relative min-h-screen w-full flex items-center justify-center px-4 overflow-hidden bg-[hsl(230_35%_6%)]">
 
-        {/* Logo */}
-<div className="flex items-center justify-center gap-2 mb-6">
-  <Link href="/#home" className="flex items-center gap-2">
-    <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-      <Film className="text-primary" size={24} />
-    </div>
-    <span className="font-display text-2xl font-bold text-primary tracking-wider">
-      CineFlix
-    </span>
-  </Link>
-</div>
+      {/* Ambient blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-secondary/8 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[80px]" />
+      </div>
 
-        <h1 className="text-xl font-semibold text-foreground text-center mb-1">
-          Welcome back
-        </h1>
-        <p className="text-sm text-muted-foreground text-center mb-8">
-          Login to access your dashboard
-        </p>
+      {/* Subtle grid overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "linear-gradient(hsl(45 95% 58%) 1px, transparent 1px), linear-gradient(90deg, hsl(45 95% 58%) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email */}
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-muted-foreground text-xs uppercase tracking-wider">
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              value={form.email}
-              onChange={handleChange}
-              required
-              className="bg-muted border-border focus:border-primary/50 focus:ring-primary/20 h-11"
-            />
+      {/* ── Card ─────────────────────────────────────────────────────────── */}
+      <div className="relative w-full max-w-md animate-fade-in">
+
+        {/* Glow ring behind card */}
+        <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-secondary/20 blur-sm" />
+
+        <div className="relative rounded-3xl border border-white/[0.08] bg-[hsl(230_30%_9%/0.85)] backdrop-blur-2xl p-8 shadow-[0_32px_80px_hsl(0_0%_0%/0.5)]">
+
+          {/* Top shimmer line */}
+          <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-primary/60 to-transparent rounded-full" />
+
+          {/* Logo */}
+          <div className="flex items-center justify-center gap-2 mb-7">
+            <Link href="/#home" className="flex items-center gap-2 group">
+              <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/15 transition-colors">
+                <Film className="text-primary" size={22} />
+              </div>
+              <span className="font-display text-2xl font-bold text-primary tracking-wider">
+                CineFlix
+              </span>
+            </Link>
           </div>
 
-          {/* Password */}
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-muted-foreground text-xs uppercase tracking-wider">
-              Password
-            </Label>
-            <div className="relative">
+          <h1 className="text-xl font-semibold text-foreground text-center mb-1">
+            Welcome back
+          </h1>
+          <p className="text-sm text-muted-foreground text-center mb-7">
+            Login to access your dashboard
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email */}
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-muted-foreground text-[10px] uppercase tracking-widest">
+                Email
+              </Label>
               <Input
-                id="password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                value={form.password}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={form.email}
                 onChange={handleChange}
                 required
-                className="bg-muted border-border focus:border-primary/50 focus:ring-primary/20 h-11 pr-11"
+                className="bg-white/[0.04] border-white/[0.08] focus:border-primary/50 focus:bg-white/[0.06] h-11 transition-colors placeholder:text-muted-foreground/40"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword((p) => !p)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
             </div>
-            <div className="text-right">
-              <Link
-                href="/forgot-password"
-                className="text-xs text-primary hover:text-primary-glow transition-colors"
-              >
-                Forgot password?
-              </Link>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-muted-foreground text-[10px] uppercase tracking-widest">
+                Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  className="bg-white/[0.04] border-white/[0.08] focus:border-primary/50 focus:bg-white/[0.06] h-11 pr-11 transition-colors placeholder:text-muted-foreground/40"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((p) => !p)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                </button>
+              </div>
+              <div className="text-right">
+                <Link href="/forgot-password" className="text-xs text-primary/70 hover:text-primary transition-colors">
+                  Forgot password?
+                </Link>
+              </div>
             </div>
+
+            {/* Submit */}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-11 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all hover:shadow-[0_0_24px_hsl(45_95%_58%/0.4)] disabled:opacity-60"
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                  Logging in...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <LogIn size={15} />
+                  Login
+                </span>
+              )}
+            </Button>
+          </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-white/[0.06]" />
+            <span className="text-[10px] text-muted-foreground/50 uppercase tracking-widest">or</span>
+            <div className="flex-1 h-px bg-white/[0.06]" />
           </div>
 
-          {/* Submit */}
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full h-11 bg-primary text-primary-foreground font-semibold hover:bg-primary-glow transition-all hover:shadow-[var(--glow-soft)] disabled:opacity-60"
-          >
-            {loading ? (
-              <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                Logging in...
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                <LogIn size={16} />
-                Login
-              </span>
-            )}
-          </Button>
-        </form>
+          <p className="text-center text-sm text-muted-foreground">
+            New here?{" "}
+            <Link href="/register" className="text-primary hover:text-primary/80 transition-colors font-medium">
+              Create an account
+            </Link>
+          </p>
 
-        {/* Footer link */}
-        <p className="text-center text-sm text-muted-foreground mt-6">
-          New here?{" "}
-          <Link href="/register" className="text-primary hover:text-primary-glow transition-colors font-medium">
-            Create an account
-          </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
