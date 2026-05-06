@@ -35,14 +35,16 @@ export default function RegisterPage() {
       <div className="bg-card border border-border rounded-2xl p-8 shadow-[var(--shadow-card)] animate-fade-in">
 
         {/* Logo */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-            <Film className="text-primary" size={24} />
-          </div>
-          <span className="font-display text-2xl font-bold text-primary tracking-wider">
-            CineFlix
-          </span>
-        </div>
+<div className="flex items-center justify-center gap-2 mb-6">
+  <Link href="/#home" className="flex items-center gap-2">
+    <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+      <Film className="text-primary" size={24} />
+    </div>
+    <span className="font-display text-2xl font-bold text-primary tracking-wider">
+      CineFlix
+    </span>
+  </Link>
+</div>
 
         <h1 className="text-xl font-semibold text-foreground text-center mb-1">
           Create your account
